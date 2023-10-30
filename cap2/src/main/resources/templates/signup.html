@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Signup</title>
+</head>
+<body>
+<h1>Signup</h1>
+<form th:action="@{/signup}" th:object="${member}" method="post">
+    <!-- 다음과 같이 th:field를 사용하여 각 입력 필드와 엔티티의 필드를 연결합니다 -->
+    <label for="name">Name: </label>
+    <input type="text" th:field="*{name}" required="required"><br>
+    <label for="age">Age: </label>
+    <input type="text" th:field="*{age}" required="required"><br>
+    <input type="submit" value="Signup">
+</form>
+
+</body>
+</html>
+
+

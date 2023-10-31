@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MemberController {
+
+    @GetMapping("/")
+    public String mainpage() {
+        return "mainP";
+    }
     @Autowired
     private MemberRepository memberRepository;
 

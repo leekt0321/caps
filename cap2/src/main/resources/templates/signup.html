@@ -46,10 +46,21 @@
 <div class="signup-form">
     <h1>Signup</h1>
     <form th:action="@{/signup}" th:object="${member}" method="post">
+        <label for="u_id">ID: </label>
+        <input type="text" th:field="*{u_id}" class="signup-input" required="required"><br>
+        <label for="u_pw">PW: </label>
+        <input type="text" th:field="*{u_pw}" class="signup-input" required="required"><br>
         <label for="name">Name: </label>
         <input type="text" th:field="*{name}" class="signup-input" required="required"><br>
         <label for="age">Age: </label>
         <input type="text" th:field="*{age}" class="signup-input" required="required"><br>
+        <label for="height">Height: </label>
+        <input type="text" th:field="*{height}" class="signup-input" required="required"><br>
+        <label for="weight">Weight: </label>
+        <input type="text" th:field="*{weight}" class="signup-input" required="required"><br>
+
+
+
         <input type="submit" value="Signup" class="signup-button">
     </form>
 </div>

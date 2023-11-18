@@ -32,6 +32,7 @@ public class MemberController {
 
     @PostMapping("/signup")
     public String processSignup(@ModelAttribute Member member) {    // POST요청을 처리, 사용자가 입력한 회원정보를 받아 DB에 저장
+
         memberRepository.save(member); //회원번호 저장
         return "redirect:/signup-success?name=" + member.getName() + // 회원 정보를 signup-success로 전달
                 "&age=" + member.getAge();

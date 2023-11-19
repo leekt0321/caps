@@ -18,14 +18,14 @@ public class Member {
     private String u_pw ;
     private String name ;
     private Long age ;
-    private float height ;
-    private float weight ;
+    private Float height ;
+    private Float weight ;
     private float BMI ;
     public Member(){
 
     }
 
-    public Member(String id,String pw,String name,Long age,float height,float weight) {
+    public Member(String id,String pw,String name,Long age,Float height,Float weight) {
         this.u_id=id;
         this.u_pw=pw;
         this.name=name;

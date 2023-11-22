@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
+
 @Controller
 public class MemberController {
 
@@ -22,6 +23,9 @@ public class MemberController {
     public String mainpage() {
         return "mainP";
     }
+
+    @GetMapping("/login")
+    public String login(){return "login";}
     @Autowired
     private MemberRepository memberRepository;
 

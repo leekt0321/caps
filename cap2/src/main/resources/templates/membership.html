@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Join to membership</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* 배경 색상 추가 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .membership-form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .membership-input {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 200px;
+            font-size: 16px;
+        }
+
+        .membership-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4caf50;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .membership-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="membership-form">
+    <h1>회원가입</h1>
+    <form th:action="@{/membership}" th:object="${member}" method="post">
+        <label for="u_id">ID: </label>
+        <input type="text" th:field="*{u_id}" class="membership-input" required="required"><br>
+        <label for="u_pw">PW: </label>
+        <input type="password" th:field="*{u_pw}" class="membership-input" required="required"><br>
+        <label for="name">이름: </label>
+        <input type="text"  th:field="*{name}" class="membership-input" required="required"><br>
+        <label for="age">나이: </label>
+        <input type="text" th:field="*{age}" class="membership-input" required="required"><br>
+        <label for="height">키: </label>
+        <input type="text" th:field="*{height}" class="membership-input" required="required"><br>
+        <label for="weight">몸무게: </label>
+        <input type="text" th:field="*{weight}" class="membership-input" required="required"><br>
+
+
+        <input type="submit" value="가입하기" class="membership-button">
+        <h4> * 주의!! 너무 지나친 목표설정보다 천천히 꾸준히 할 수 있는 목표를 설정해 보세요. 더 빠르고 성공률이 높아질 거에요!!</h4>
+    </form>
+</div>
+</body>
+</html>

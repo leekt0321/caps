@@ -9,21 +9,29 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity // 이 클래스가 JPA엔티티임을 표시. 테이블 생성
-@Table(name = "login")
+@Table(name = "user_table")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+    private Long seq;
+    private String u_id;
+    private String u_pw ;
+    private String name ;
     private Long age ;
+    private Float height ;
+    private Float weight ;
+    private float BMI ;
     public Member(){
 
     }
 
-    public Member(String name,Long age, String sex, float height,float weigth) {
+    public Member(String id,String pw,String name,Long age,Float height,Float weight) {
+        this.u_id=id;
+        this.u_pw=pw;
         this.name=name;
         this.age=age;
-
+        this.height=height;
+        this.weight=weight;
     }
     // Getter와 Setter 메서드
 }

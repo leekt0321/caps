@@ -1,0 +1,100 @@
+<!-- frame.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spring Boot Web App</title>
+
+  <!-- 추가된 부분: jQuery를 사용하여 AJAX를 수행합니다. -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <style>
+    body {
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .main-container {
+        text-align: center;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 10vh; /* 상단 여백을 10vh로 설정 */
+        margin-bottom: 10vh; /* 하단 여백을 10vh로 설정 */
+        min-height: 60vh; /* 최소 높이를 60vh로 설정 */
+    }
+
+    .quest-header {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .menu-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .menu-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 0 10px;
+        background-color: #4caf50;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .menu-button:hover {
+        background-color: #45a049;
+    }
+
+    #content-container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body th:if="${#request.getRequestURI() == '/main'}">
+<div class="main-container">
+  <div class="quest-header">다이어트 퀘스트</div>
+  <div class="menu-container">
+    <a href="/menu1" class="menu-button">Menu 1</a>
+    <a href="/menu2" class="menu-button">Menu 2</a>
+    <a href="/menu3" class="menu-button">Menu 3</a>
+    <a href="/menu4" class="menu-button">Menu 4</a>
+    <a href="/menu5" class="menu-button">Menu 5</a>
+  </div>
+
+  <!-- 컨텐츠를 갱신할 컨테이너 -->
+  <div id="content-container">
+    <!-- 초기에는 menu1의 컨텐츠를 보여줍니다. -->
+    <div th:include="content/menu1 :: menuContent"></div>
+  </div>
+</div>
+
+<!-- 추가된 부분: 메뉴 버튼 클릭 시 AJAX를 통해 컨텐츠 갱신 -->
+<script th:inline="javascript">
+  $(document).ready(function() {
+      $('.menu-button').click(function(e) {
+          e.preventDefault();
+
+          var menuUrl = $(this).attr('href');
+
+          $.get(menuUrl, function(data) {
+              $('#content-container').html(data);
+          });
+      });
+  });
+</script>
+</body>
+</html>

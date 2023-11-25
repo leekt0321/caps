@@ -32,7 +32,6 @@ public class MemberController {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("userCookie")) {
-                    // 쿠키 확인 후 조건에 맞게 페이지 이동
                     return "redirect:/main";
                 }
             }

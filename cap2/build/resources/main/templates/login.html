@@ -41,13 +41,14 @@
 
         button {
             width: calc(48% - 5px); /* 수정: 버튼의 너비 조절 */
-            padding: 15px;
+            padding: 5px;
             font-size: 20px;
             background-color: #4caf50;
             color: #ffffff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-right:10px;
         }
 
         button:hover {
@@ -58,17 +59,27 @@
 <body>
 <div th:fragment="menuContent">
     <div class="login-container">
+        <div th:if="${param.error}">
+            <p style="color: red;text-align: center;">Invalid credentials. Please try again.</p>
+        </div>
+
+        <div th:if="${loginError != null}">
+            <p style="color: red;text-align: center;" th:text="${loginError}"></p>
+        </div>
+
         <h2>로그인</h2>
         <form action="/login" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="id">ID:</label>     <!-- 씹련아 이거때메 1시간 벼렸잖아 진짜 개뒤질래? ㅆㅂ!!!!!!!!!!!!!!!!!!!!!! 내일 개쳐맞자-->
+            <input type="text" id="id" name="id" required>
             <br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="pw">Password:</label>
+            <input type="password" id="pw" name="pw" required>
             <br>
             <div class="button-container">
+                <button onclick="location.href='/'">뒤로</button>
                 <button type="submit">로그인</button>
                 <button onclick="location.href='/membership'">회원가입</button>
+
             </div>
         </form>
     </div>

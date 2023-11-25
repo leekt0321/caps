@@ -66,6 +66,7 @@
 </head>
 <body th:if="${#request.getRequestURI() == '/main'}">
 <div class="main-container">
+
   <div class="quest-header">다이어트 퀘스트</div>
   <div class="menu-container">
     <a href="/menu1" class="menu-button">Menu 1</a>
@@ -79,7 +80,10 @@
   <div id="content-container">
     <!-- 초기에는 menu1의 컨텐츠를 보여줍니다. -->
     <div th:include="content/menu1 :: menuContent"></div>
+
+
   </div>
+  <a href="/logout" class="menu-button">로그아웃</a>
 </div>
 
 <!-- 추가된 부분: 메뉴 버튼 클릭 시 AJAX를 통해 컨텐츠 갱신 -->

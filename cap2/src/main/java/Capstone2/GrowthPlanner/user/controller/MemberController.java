@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -25,7 +27,18 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String login(){return "login";}
+    public String login(HttpServletRequest request){
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("userCookie")) {
+                    // 쿠키 확인 후 조건에 맞게 페이지 이동
+                    return "redirect:/main";
+                }
+            }
+        }
+        return "login";
+    }
     @Autowired
     private MemberRepository memberRepository;
 
@@ -58,7 +71,6 @@ public class MemberController {
 
         return "signup-success";// signup-success.html 템플릿 파일
     }
-
 
 
 }

@@ -14,8 +14,8 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seq;
-    private String u_id;
-    private String u_pw ;
+    private String id;
+    private String pw ;
     private String name ;
     private Long age ;
     private Float height ;
@@ -26,12 +26,22 @@ public class Member {
     }
 
     public Member(String id,String pw,String name,Long age,Float height,Float weight) {
-        this.u_id=id;
-        this.u_pw=pw;
+        this.id=id;
+        this.pw=pw;
         this.name=name;
         this.age=age;
         this.height=height;
         this.weight=weight;
     }
     // Getter와 Setter 메서드
+    /*
+    * private String u_id;
+    * public String getU_id(){
+    *  return u_id;
+    * }
+    *
+    * public void setU_id(String u_id){
+    *   this.u_id=u_id;
+    * }
+    * */
 }

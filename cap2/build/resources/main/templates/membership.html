@@ -46,10 +46,10 @@
 <div class="membership-form">
     <h1>회원가입</h1>
     <form th:action="@{/membership}" th:object="${member}" method="post">
-        <label for="u_id">ID: </label>
-        <input type="text" th:field="*{u_id}" class="membership-input" required="required"><br>
-        <label for="u_pw">PW: </label>
-        <input type="password" th:field="*{u_pw}" class="membership-input" required="required"><br>
+        <label for="id">ID: </label>
+        <input type="text" th:field="*{id}" class="membership-input" required="required"><br>
+        <label for="pw">PW: </label>
+        <input type="password" th:field="*{pw}" class="membership-input" required="required"><br>
         <label for="name">이름: </label>
         <input type="text"  th:field="*{name}" class="membership-input" required="required"><br>
         <label for="age">나이: </label>
@@ -60,7 +60,9 @@
         <input type="text" th:field="*{weight}" class="membership-input" required="required"><br>
 
 
+        <a href="/login" class="membership-button">뒤로가기</a>
         <input type="submit" value="가입하기" class="membership-button">
+
         <h4> * 주의!! 너무 지나친 목표설정보다 천천히 꾸준히 할 수 있는 목표를 설정해 보세요. 더 빠르고 성공률이 높아질 거에요!!</h4>
     </form>
 </div>

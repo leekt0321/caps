@@ -2,17 +2,63 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>어서오세요!</title>
+  <style>
+        body {
+            background-color: #f0f0f0; /* 배경 색상 추가 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .signup-form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .signup-input {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 200px;
+            font-size: 16px;
+        }
+
+        .signup-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4caf50;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .signup-button:hover {
+            background-color: #45a049;
+        }
+        .signup-form p {
+         margin-bottom: 1px; /* Name과 Age 사이의 간격 조정 */
+         }
+
+    </style>
 </head>
 <body>
-<h1>회원가입 성공!!!</h1>
-<p>가입을 환영합니다! 목표를 향해 열심히 해봐요!!</p>
+<div class="signup-form">
+<h1>회원가입 성공!!!</h1><br>
+<p>가입을 환영합니다! 목표를 향해 열심히 해봐요!!</p><br>
 
 
 <!-- 회원가입 정보 출력 -->
-<p>Name: <span th:text="${name}"></span></p>
-<p>Age: <span th:text="${age}"></span></p>
+<p>Name: <span th:text="${name} "></span></p><br>
+<p>Age: <span th:text="${age}"></span></p><br>
 
-<!-- 다른 내용을 원하는 대로 추가할 수 있습니다. -->
+<a href="/login" class="signup-button">로그인</a>
+<a href="/" class="signup-button">메인으로</a>
+</div>
 </body>
 </html>
 

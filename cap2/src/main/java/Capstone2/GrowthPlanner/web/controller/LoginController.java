@@ -24,7 +24,7 @@ public class LoginController {
         // 사용자 인증 (자격 증명 유효성 검사 등)
         boolean isAuthenticated = entityService.authenticateUser(member.getId(), member.getPw());
 
-        if(isAuthenticated) {.
+        if(isAuthenticated) {
             Cookie cookie = new Cookie("userCookie", "userIdentifier"); //쿠키 이름
             cookie.setMaxAge(3600); // 쿠키 만료 시간:1시간 (초 단위임)
 

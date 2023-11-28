@@ -1,11 +1,13 @@
 package Capstone2.GrowthPlanner.user.controller;
 
 import Capstone2.GrowthPlanner.user.repository.MemberRepository;
+import Capstone2.GrowthPlanner.user.repository.entitiy.Game;
 import Capstone2.GrowthPlanner.user.repository.entitiy.Member;
 import Capstone2.GrowthPlanner.user.service.EntityService;
 
 
 import Capstone2.GrowthPlanner.user.service.EntityService;
+import Capstone2.GrowthPlanner.user.service.GameService;
 import org.aspectj.lang.reflect.MemberSignature;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -42,6 +44,8 @@ public class MainController {
     private EntityService entityService;
     @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private GameService gameService;
     @GetMapping("/menu3") // userId는 실제 사용자 ID로 대체되어야 합니다.
     public String getMenu3Page(Model model, HttpServletRequest request) {
         Cookie[] cookies=request.getCookies();
@@ -59,6 +63,10 @@ public class MainController {
             Member loggedInMember=memberRepository.findById(userId);
             if(loggedInMember!=null){
                 model.addAttribute("member",loggedInMember);
+
+                Game game=gameService.getGameInfo(loggedInMember.getSeq());
+                model.addAttribute("game",game);
+
                 return "content/menu3";
             }
         }

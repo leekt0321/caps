@@ -4,7 +4,7 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
+import Capstone2.GrowthPlanner.user.repository.entitiy.Game;
 @Getter
 @Setter
 @ToString
@@ -22,6 +22,10 @@ public class Member {
     private Float weight ;
     private float BMI ;
     private Float goal;
+
+    @OneToOne(mappedBy = "member",cascade = CascadeType.ALL)
+    private Game game;
+
     public Member(){
 
     }

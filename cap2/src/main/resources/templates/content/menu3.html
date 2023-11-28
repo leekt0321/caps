@@ -2,12 +2,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- ... (다른 헤더 정보들) ... -->
+    <meta charset="UTF-8">
+    <title>Menu3</title>
 </head>
 <body>
-<div th:fragment="menuContent">
-    <h2>Menu 3 Content</h2>
-    <p>이곳에 Menu 3에 대한 내용을 추가하세요.</p>
-</div>
+    <div>
+        <h2>나의 스텟</h2>
+        <p>설정한 목표까지 열심히 해봐라!~</p>
+
+        <p>이름: <span th:text="${member.name}"></span></p>
+        <p>나이: <span th:text="${member.age}"></span></p>
+        <p>키: <span th:text="${member.height}"></span></p>
+        <p>몸무게: <span th:text="${member.weight}"></span></p>
+        <p>BMI: <span th:text="${member.BMI}"></span></p>
+        <p>목표 체중: <span th:text="${member.goal}"></span></p>
+    </div>
 </body>
 </html>

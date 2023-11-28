@@ -55,6 +55,7 @@ public class MemberController {
         String encodedName = UriComponentsBuilder.fromPath("/signup-success")
                 .queryParam("name", member.getName())
                 .queryParam("age", member.getAge())
+                .queryParam("goal", member.getGoal())
                 .buildAndExpand()
                 .encode()
                 .toUriString();
@@ -63,10 +64,12 @@ public class MemberController {
     @GetMapping("/signup-success")
     public String showSignupSuccess(@RequestParam String name,      // 입력한 회원 정보를 받아 모델에 추가해 signup-success.html로 표시.
                                     @RequestParam Long age,
+                                    @RequestParam Float goal,
                                     Model model)
     {
         model.addAttribute("name", name);
         model.addAttribute("age", age);
+        model.addAttribute("goal", goal);
 
         return "signup-success";// signup-success.html 템플릿 파일
     }

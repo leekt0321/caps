@@ -21,17 +21,19 @@ public class Member {
     private Float height ;
     private Float weight ;
     private float BMI ;
+    private Float goal;
     public Member(){
 
     }
 
-    public Member(String id,String pw,String name,Long age,Float height,Float weight) {
+    public Member(String id,String pw,String name,Long age,Float height,Float weight,Float goal) {
         this.id=id;
         this.pw=pw;
         this.name=name;
         this.age=age;
         this.height=height;
         this.weight=weight;
+        this.goal=goal;
     }
     // Getter와 Setter 메서드
     /*

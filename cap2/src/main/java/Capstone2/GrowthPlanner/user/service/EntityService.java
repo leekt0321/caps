@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 public class EntityService {
     @Autowired
@@ -30,4 +32,9 @@ public class EntityService {
         return false; // 인증 실패
 
     }
+
+    public Member getMemberById(String id){
+        return memberRepository.findById(id);
+    }
+
 }

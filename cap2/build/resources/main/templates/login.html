@@ -35,20 +35,20 @@
         }
 
         .button-container {
-            display: flex;
-            justify-content: space-between; /* 수정: 버튼 간 여백을 벌림 */
+            display: inline-block; /* 인라인 블록으로 설정 */
+            margin-right: 10px; /* 각 버튼 사이의 간격 조절 */
         }
 
         button {
-            width: calc(48% - 5px); /* 수정: 버튼의 너비 조절 */
+            width: calc(25% - 5px); /* 수정: 버튼의 너비 조절 */
             padding: 5px;
-            font-size: 20px;
+            font-size: 18px;
             background-color: #4caf50;
             color: #ffffff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-right:10px;
+
         }
 
         button:hover {
@@ -68,6 +68,8 @@
         </div>
 
         <h2>Sign in</h2>
+
+
         <form action="/login" method="post">
             <label for="id">ID:</label>
             <input type="text" id="id" name="id" required>
@@ -75,13 +77,13 @@
             <label for="pw">Password:</label>
             <input type="password" id="pw" name="pw" required>
             <br>
-            <div class="button-container">
-                <button onclick="location.href='/'">Go Back</button>
-                <button type="submit">Sign in</button>
-                <button onclick="location.href='/membership'">Sign up</button>
 
-            </div>
+
+
         </form>
+        <button type="submit" action="/login" >Sign in</button>
+        <button onclick="location.href='/'" >Go Back</button>
+        <button onclick="location.href='/membership'" >Sign up</button>
     </div>
 </div>
 </body>

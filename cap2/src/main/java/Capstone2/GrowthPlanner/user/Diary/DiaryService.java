@@ -17,6 +17,8 @@ public class DiaryService {
     @Autowired
     private MemberRepository memberRepository;
 
+
+
     public List<Diary> getUserDiaries(String userId) {
         Member user = memberRepository.findById(userId);
         if (user != null) {

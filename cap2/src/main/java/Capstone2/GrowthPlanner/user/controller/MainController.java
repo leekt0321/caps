@@ -78,10 +78,23 @@ public class MainController {
     }
 
     @GetMapping("/menu2")
-    public String menu2() {
+    public String menu2(Model model, @CookieValue(name = "userCookie", required = false) String userId) {
+        if (userId == null) {
+            return "redirect:/menu5";
+        }
+
+        Member user = memberRepository.findById(userId);
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        // 사용자의 모든 다이어리 불러오기
+        List<Diary> userDiaries = diaryService.getUserDiaries(userId);
+
+        model.addAttribute("userDiaries", userDiaries);
+
         return "content/menu2";
     }
-
 
     @GetMapping("/menu3") // userId는 실제 사용자 ID로 대체되어야 합니다.
     public String getMenu3Page(Model model, HttpServletRequest request) {

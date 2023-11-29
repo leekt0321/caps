@@ -67,7 +67,7 @@
             <p style="color: red;text-align: center;" th:text="${loginError}"></p>
         </div>
 
-        <h2>로그인</h2>
+        <h2>Sign in</h2>
         <form action="/login" method="post">
             <label for="id">ID:</label>
             <input type="text" id="id" name="id" required>
@@ -76,9 +76,9 @@
             <input type="password" id="pw" name="pw" required>
             <br>
             <div class="button-container">
-                <button onclick="location.href='/'">뒤로</button>
-                <button type="submit">로그인</button>
-                <button onclick="location.href='/membership'">회원가입</button>
+                <button onclick="location.href='/'">Go Back</button>
+                <button type="submit">Sign in</button>
+                <button onclick="location.href='/membership'">Sign up</button>
 
             </div>
         </form>

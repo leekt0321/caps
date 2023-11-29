@@ -7,38 +7,22 @@ import Capstone2.GrowthPlanner.user.repository.MemberRepository;
 import Capstone2.GrowthPlanner.user.repository.entitiy.Game;
 import Capstone2.GrowthPlanner.user.repository.entitiy.Member;
 import Capstone2.GrowthPlanner.user.service.EntityService;
-
-
-import Capstone2.GrowthPlanner.user.service.EntityService;
 import Capstone2.GrowthPlanner.user.service.GameService;
 import Capstone2.GrowthPlanner.user.repository.GameRepository;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-
-import java.util.ArrayList;
-import java.util.List;
-import org.aspectj.lang.reflect.MemberSignature;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.util.Optional;
-import java.security.Principal;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Controller
 public class MainController {
@@ -54,6 +38,8 @@ public class MainController {
 
     @Autowired
     private GameService gameService;
+    @Autowired
+    private GameRepository gameRepository;
 
     @GetMapping("/main")
     public String mainPage() {
@@ -325,8 +311,6 @@ public class MainController {
         return "content/menu5";
     }
 
-    @Autowired
-    private GameRepository gameRepository;
 
     @PostMapping("/checkAttendance")
     public String chaeckAttendance(HttpServletRequest request, Model model) {

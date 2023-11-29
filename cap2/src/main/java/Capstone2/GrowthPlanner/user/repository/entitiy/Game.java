@@ -1,7 +1,6 @@
 package Capstone2.GrowthPlanner.user.repository.entitiy;
 
 
-import Capstone2.GrowthPlanner.user.repository.entitiy.Member;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

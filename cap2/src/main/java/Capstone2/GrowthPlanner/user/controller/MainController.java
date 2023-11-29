@@ -1,5 +1,7 @@
+// MainController.java
 package Capstone2.GrowthPlanner.user.controller;
 
+<<<<<<< HEAD
 import Capstone2.GrowthPlanner.user.repository.MemberRepository;
 import Capstone2.GrowthPlanner.user.repository.entitiy.Game;
 import Capstone2.GrowthPlanner.user.repository.entitiy.Member;
@@ -20,10 +22,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import javax.servlet.http.Cookie;
+
+import Capstone2.GrowthPlanner.user.repository.MemberRepository;
+import Capstone2.GrowthPlanner.user.service.EntityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import Capstone2.GrowthPlanner.user.repository.entitiy.Member;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class MainController {
+
+
 
     @GetMapping("/main")
     public String mainPage() {

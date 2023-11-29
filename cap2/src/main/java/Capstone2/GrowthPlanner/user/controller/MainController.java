@@ -33,7 +33,6 @@ import java.security.Principal;
 public class MainController {
 
 
-
     @GetMapping("/main")
     public String mainPage() {
         return "frame";
@@ -56,6 +55,7 @@ public class MainController {
     @Autowired
     private GameService gameService;
 
+    
     @GetMapping("/menu3") // userId는 실제 사용자 ID로 대체되어야 합니다.
     public String getMenu3Page(Model model, HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
@@ -85,10 +85,7 @@ public class MainController {
 
 
     @GetMapping("/menu4")
-    public String menu4(Model model, HttpServletRequest request,@RequestParam(value="mission1", required = false) String mission1,
-                        @RequestParam(value="mission2", required = false) String mission2,
-                        @RequestParam(value="mission3", required = false) String mission3,
-                        @RequestParam(value="mission4", required = false) String mission4) {
+    public String menu4(Model model, HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         String userId = null;
         if (cookies != null) {
@@ -107,6 +104,8 @@ public class MainController {
 
                     Long level=game.getLevel();
                     Long count=game.getCount();
+                    Long patient=game.getPatient();
+
                     if(count<7&&count>=0) game.setLevel(1L);
                     else if(count<14&&count>=7) game.setLevel(2L);
                     else if(count<21&&count>=14) game.setLevel(3L);
@@ -114,102 +113,51 @@ public class MainController {
                     else if(count>=28) game.setLevel(5L);
                     else model.addAttribute("error","무언가 잘 못되었습니다.^^");
 
-                    Long patient=game.getPatient();
+
                     if(level==1&&count>=0&&count<7){
                         model.addAttribute("quest1","야식먹지않기");
                         model.addAttribute("quest2","공원 걷기");
                         model.addAttribute("quest3","밥먹고 앉아있기");
                         model.addAttribute("quest4","일기 쓰기");
-                        boolean mission1Checked = mission1 != null;
-                        boolean mission2Checked = mission2 != null;
-                        boolean mission3Checked = mission3 != null;
-                        boolean mission4Checked = mission4 != null;
-                        boolean allMissionsCompleted=mission1Checked && mission2Checked && mission3Checked && mission4Checked;
-                        if(allMissionsCompleted) {
-                            game.setPatient(patient + 1);
-                            gameRepository.save(game);
-
-
-                        }
                     }
                     else if(level==2&&count>=7&&count<14){
                         model.addAttribute("quest1","아침 챙겨먹기");
                         model.addAttribute("quest2","자전거 타기");
                         model.addAttribute("quest3","늦게 자지않기");
                         model.addAttribute("quest4","동기부여 영상 보기");
-                        boolean mission1Checked = mission1 != null;
-                        boolean mission2Checked = mission2 != null;
-                        boolean mission3Checked = mission3 != null;
-                        boolean mission4Checked = mission4 != null;
-                        boolean allMissionsCompleted=mission1Checked && mission2Checked && mission3Checked && mission4Checked;
-                        if(allMissionsCompleted) {
-                            game.setPatient(patient + 2);
-                            gameRepository.save(game);
-
-
-                        }
                     }
                     else if(level==3&&count>=14&&count<21){
                         model.addAttribute("quest1","간식 및 음료 먹지않기");
                         model.addAttribute("quest2","3Km 걷기");
                         model.addAttribute("quest3","금주");
                         model.addAttribute("quest4","썼던 일기 다시보기");
-                        boolean mission1Checked = mission1 != null;
-                        boolean mission2Checked = mission2 != null;
-                        boolean mission3Checked = mission3 != null;
-                        boolean mission4Checked = mission4 != null;
-                        boolean allMissionsCompleted=mission1Checked && mission2Checked && mission3Checked && mission4Checked;
-                        if(allMissionsCompleted) {
-                            game.setPatient(patient + 3);
-                            gameRepository.save(game);
-                        }
                     }
                     else if(level==4&&count>=21&&count<28){
                         model.addAttribute("quest1","저녁 양 줄이기");
                         model.addAttribute("quest2","3Km 뛰기");
                         model.addAttribute("quest3","엘리베이터 대신 계닫 이용 하기");
                         model.addAttribute("quest4","목표 중간 점검!");
-                        boolean mission1Checked = mission1 != null;
-                        boolean mission2Checked = mission2 != null;
-                        boolean mission3Checked = mission3 != null;
-                        boolean mission4Checked = mission4 != null;
-                        boolean allMissionsCompleted=mission1Checked && mission2Checked && mission3Checked && mission4Checked;
-                        if(allMissionsCompleted) {
-                            game.setPatient(patient + 4);
-                            gameRepository.save(game);
-                        }
                     }
                     else if(level==5&&count>=28){
                         model.addAttribute("quest1","탄수화물 줄이기");
                         model.addAttribute("quest2","3Km + 근력운동");
                         model.addAttribute("quest3","배달음식 먹지 않기");
                         model.addAttribute("quest4","출석!! 목표까지 유지하세요. 화이팅!");
-                        boolean mission1Checked = mission1 != null;
-                        boolean mission2Checked = mission2 != null;
-                        boolean mission3Checked = mission3 != null;
-                        boolean mission4Checked = mission4 != null;
-                        boolean allMissionsCompleted=mission1Checked && mission2Checked && mission3Checked && mission4Checked;
-                        if(allMissionsCompleted) {
-                            game.setPatient(patient + 5);
-                            gameRepository.save(game);
-                        }
                     }
                     else{
                         model.addAttribute("error","무언가 잘 못되었습니다.^^");
                     }
-
                 }
-
-
-
                 return "content/menu4";
             }
-
         }
         return "login";
     }
     @PostMapping("/checkAttendanceM")
-    public String chaeckAttendanceM(HttpServletRequest request, Model model) {
+    public String chaeckAttendanceM(Model model, HttpServletRequest request,@RequestParam(value="mission1", required = false) String mission1,
+                                    @RequestParam(value="mission2", required = false) String mission2,
+                                    @RequestParam(value="mission3", required = false) String mission3,
+                                    @RequestParam(value="mission4", required = false) String mission4) {
         Cookie[] cookies = request.getCookies();
         String userId = null;
         if (cookies != null) {
@@ -226,14 +174,56 @@ public class MainController {
             if (loggedInMember != null) {
                 Game game = loggedInMember.getGame();
                 if (game != null) {
-                    return "content/menu1";
+                    Long patient = game.getPatient();
+                    Long level = game.getLevel();
+                    Long count = game.getCount();
+                    if (count < 7 && count >= 0) game.setLevel(1L);
+                    else if (count < 14 && count >= 7) game.setLevel(2L);
+                    else if (count < 21 && count >= 14) game.setLevel(3L);
+                    else if (count < 28 && count >= 21) game.setLevel(4L);
+                    else if (count >= 28) game.setLevel(5L);
+                    else model.addAttribute("error", "무언가 잘 못되었습니다.^^");
+                    if (level == 1 && count >= 0 && count < 7) {
+                        boolean mission1Checked = mission1 != null;
+                        boolean mission2Checked = mission2 != null;
+                        boolean mission3Checked = mission3 != null;
+                        boolean mission4Checked = mission4 != null;
+                        boolean allMissionsCompleted = mission1Checked && mission2Checked && mission3Checked && mission4Checked;
+                        if (allMissionsCompleted) {
+                            if (level == 1 && count >= 0 && count < 7) {
+                                game.setPatient(patient + 1);
+                                gameRepository.save(game);
 
+                            }
+                            else if (level==2&&count>=7&&count<14) {
+                                game.setPatient(patient + 2);
+                                gameRepository.save(game);
+
+                            }
+                            else if (level==3&&count>=14&&count<21) {
+                                game.setPatient(patient + 3);
+                                gameRepository.save(game);
+
+                            }
+                            else if (level==4&&count>=21&&count<28) {
+                                game.setPatient(patient + 4);
+                                gameRepository.save(game);
+
+                            }
+                            else if (level==5&&count>=28) {
+                                game.setPatient(patient + 5);
+                                gameRepository.save(game);
+
+                            }
+                        }
+                    }
                 }
+                return "redirect:/main";
             }
-
         }
-        return "login";
+        return "main";
     }
+        
     @PostMapping("/resetCount")
     public String resetCount(Model model, HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
@@ -253,9 +243,12 @@ public class MainController {
             if (loggedInMember != null) {
                 Game game = loggedInMember.getGame();
                 if (game != null) {
+                    game.setPatient(0L);
+                    game.setLevel(1L);
                     game.setCount(0L);
+                    game.setAtt_check(false);
                     gameRepository.save(game);
-                    return "redirect:/menu4";
+                    return "redirect:/main";
                 }
 
             }

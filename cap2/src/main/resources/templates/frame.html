@@ -24,9 +24,9 @@
         padding: 30px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-top: 10vh; /* 상단 여백을 10vh로 설정 */
-        margin-bottom: 10vh; /* 하단 여백을 10vh로 설정 */
-        min-height: 60vh; /* 최소 높이를 60vh로 설정 */
+        margin-top: 10vh; /* 상단 여백을 10vh로 설정 /
+        margin-bottom: 10vh; / 하단 여백을 10vh로 설정 /
+        min-height: 60vh; / 최소 높이를 60vh로 설정 */
     }
 
     .quest-header {
@@ -119,6 +119,20 @@
 
           $.get(menuUrl, function(data) {
               $('#content-container').html(data);
+          });
+      });
+
+      $(document).on('submit', 'form', function(e) {
+          e.preventDefault();
+          var form = $(this);
+          var url = form.attr('action');
+          $.ajax({
+              type: 'POST',
+              url: url,
+              data: form.serialize(),
+              success: function(data) {
+                  $('#content-container').html(data);
+              }
           });
       });
   });

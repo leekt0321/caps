@@ -1,10 +1,13 @@
 package Capstone2.GrowthPlanner.user.repository.entitiy;
 
-import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import Capstone2.GrowthPlanner.user.repository.entitiy.Game;
+
+import javax.persistence.*;
+import java.util.Objects;
+
 @Getter
 @Setter
 @ToString
@@ -39,15 +42,18 @@ public class Member {
         this.weight=weight;
         this.goal=goal;
     }
-    // Getter와 Setter 메서드
-    /*
-    * private String u_id;
-    * public String getU_id(){
-    *  return u_id;
-    * }
-    *
-    * public void setU_id(String u_id){
-    *   this.u_id=u_id;
-    * }
-    * */
+
+    // equals, hashCode 메서드 추가
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return Objects.equals(seq, member.seq);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(seq);
+    }
 }

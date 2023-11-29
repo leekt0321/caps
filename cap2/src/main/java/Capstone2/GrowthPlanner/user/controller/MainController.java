@@ -1,5 +1,7 @@
 package Capstone2.GrowthPlanner.user.controller;
 
+import Capstone2.GrowthPlanner.user.Diary.Diary;
+import Capstone2.GrowthPlanner.user.Diary.DiaryService;
 import Capstone2.GrowthPlanner.user.repository.MemberRepository;
 import Capstone2.GrowthPlanner.user.repository.entitiy.Game;
 import Capstone2.GrowthPlanner.user.repository.entitiy.Member;
@@ -10,12 +12,9 @@ import Capstone2.GrowthPlanner.user.service.EntityService;
 import Capstone2.GrowthPlanner.user.service.GameService;
 import org.aspectj.lang.reflect.MemberSignature;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,14 +24,57 @@ import java.util.List;
 @Controller
 public class MainController {
 
+    @Autowired
+    private DiaryService diaryService;
+
+    @Autowired
+    private EntityService entityService;
+
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
+    private GameService gameService;
+
     @GetMapping("/main")
     public String mainPage() {
         return "frame";
     }
 
     @GetMapping("/menu1")
-    public String menu1() {
+    public String menu1(Model model, @CookieValue(name = "userCookie", required = false) String userId) {
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        Member user = memberRepository.findById(userId);
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        List<Diary> userDiaries = diaryService.getUserDiaries(userId);
+        model.addAttribute("userDiaries", userDiaries);
         return "content/menu1";
+    }
+
+    @PostMapping("/menu1/saveDiary")
+    public String saveDiary(@RequestParam String diaryContent, @CookieValue(name = "userCookie", required = false) String userId) {
+        if (userId == null) {
+            return "redirect:/menu5";
+        }
+
+        Member user = memberRepository.findById(userId);
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        try {
+            diaryService.saveDiary(user, diaryContent);
+            return "redirect:/menu1";
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     @GetMapping("/menu2")
@@ -40,12 +82,7 @@ public class MainController {
         return "content/menu2";
     }
 
-    @Autowired
-    private EntityService entityService;
-    @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private GameService gameService;
+
     @GetMapping("/menu3") // userId는 실제 사용자 ID로 대체되어야 합니다.
     public String getMenu3Page(Model model, HttpServletRequest request) {
         Cookie[] cookies=request.getCookies();

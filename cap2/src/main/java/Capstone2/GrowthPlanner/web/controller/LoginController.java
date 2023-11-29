@@ -31,7 +31,7 @@ public class LoginController {
 
         if(isAuthenticated) {
             Cookie cookie = new Cookie("userCookie", member.getId()); //쿠키 이름
-            cookie.setMaxAge(20); // 쿠키 만료 시간:1시간 (초 단위임)
+            cookie.setMaxAge(60); // 쿠키 만료 시간:1시간 (초 단위임)
 
             response.addCookie(cookie);
 

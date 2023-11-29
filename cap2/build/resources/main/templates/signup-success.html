@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>어서오세요!</title>
+  <title>Welcome!</title>
   <style>
         body {
             background-color: #f0f0f0; /* 배경 색상 추가 */
@@ -48,17 +48,17 @@
 </head>
 <body>
 <div class="signup-form">
-<h1>회원가입 성공!!!</h1><br>
-<p>가입을 환영합니다! 목표를 향해 열심히 해봐요!!</p><br>
+<h1>Successful registration!!!</h1><br>
+<p>Welcome aboard! Let's work hard toward your goals!!</p><br>
 
 
 <!-- 회원가입 정보 출력 -->
 <p>Name: <span th:text="${name} "></span></p><br>
 <p>Age: <span th:text="${age}"></span></p><br>
-  <p>목표 체중: <span th:text="${goal}"></span></p><br>
+  <p>Target Weight: <span th:text="${goal}"></span></p><br>
 
-<a href="/login" class="signup-button">로그인</a>
-<a href="/" class="signup-button">메인으로</a>
+<a href="/login" class="signup-button">Sign in</a>
+<a href="/" class="signup-button">Go to main</a>
 </div>
 </body>
 </html>

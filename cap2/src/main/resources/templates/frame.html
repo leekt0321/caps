@@ -1,12 +1,9 @@
-<!-- frame.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spring Boot Web App</title>
-
-  <!-- 추가된 부분: jQuery를 사용하여 AJAX를 수행합니다. -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <style>
     body {
@@ -19,14 +16,17 @@
     }
 
     .main-container {
+        display: flex;
+        flex-direction: column;
         text-align: center;
         background-color: #ffffff;
-        padding: 30px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-top: 10vh; /* 상단 여백을 10vh로 설정 /
-        margin-bottom: 10vh; / 하단 여백을 10vh로 설정 /
-        min-height: 60vh; / 최소 높이를 60vh로 설정 */
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        height: 80vh;
+        width: 40%;
+        overflow: hidden;
     }
 
     .quest-header {
@@ -36,43 +36,21 @@
 
     .menu-container {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
-        margin-bottom: 20px;
+        gap: 10px;
     }
 
     .menu-button {
         padding: 10px 20px;
         font-size: 16px;
-        margin: 0 10px;
         background-color: #4caf50;
         color: #ffffff;
         border: none;
         border-radius: 5px;
         text-decoration: none;
         cursor: pointer;
-    }
-    .logout-button {
-        padding: 10px 20px;
-        font-size: 16px;
         margin: 0 10px;
-        background-color: #4caf50;
-        color: #ffffff;
-        border: none;
-        border-radius: 5px;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .logout-button {
-        padding: 10px 20px;
-        font-size: 16px;
-        margin: 0 10px;
-        background-color: #4caf50;
-        color: #ffffff;
-        border: none;
-        border-radius: 5px;
-        text-decoration: none;
-        cursor: pointer;
     }
 
     .menu-button:hover {
@@ -80,43 +58,59 @@
     }
 
     #content-container {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: auto;
+            min-height: 60vh;
+            margin-left: 20px;  /* 왼쪽 여백 20px */
+            margin-right: 20px; /* 오른쪽 여백 20px */
+
+            overflow-y: auto;
+            flex-grow: 1;
+            margin-bottom: 20px; /* 하단 여백 추가 */
+    }
+
+    .logout-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-bottom: 10px; /* 로그아웃 버튼과의 여백 추가 */
+            margin-left: 300px;  /* 왼쪽 여백 20px */
+            margin-right: 300px; /* 오른쪽 여백 20px */
+            align-items: center;
     }
   </style>
 </head>
 <body th:if="${#request.getRequestURI() == '/main'}">
 <div class="main-container">
-
   <div class="quest-header">다이어트 퀘스트</div>
   <div class="menu-container">
-    <a href="/menu1" class="menu-button">Menu 1</a>
-    <a href="/menu2" class="menu-button">Menu 2</a>
-    <a href="/menu3" class="menu-button">Menu 3</a>
-    <a href="/menu4" class="menu-button">Menu 4</a>
-    <a href="/menu5" class="menu-button">Menu 5</a>
+    <a href="/menu1" class="menu-button">Main</a>
+    <a href="/menu2" class="menu-button">Diary</a>
+    <a href="/menu3" class="menu-button">Status</a>
+    <a href="/menu4" class="menu-button">Quest</a>
+    <a href="/menu5" class="menu-button">Attendance</a>
   </div>
 
-  <!-- 컨텐츠를 갱신할 컨테이너 -->
   <div id="content-container">
-    <!-- 초기에는 menu1의 컨텐츠를 보여줍니다. -->
     <div th:include="content/menu1 :: menuContent"></div>
-
-
   </div>
+
   <a href="/logout" class="logout-button">로그아웃</a>
 </div>
 
-<!-- 추가된 부분: 메뉴 버튼 클릭 시 AJAX를 통해 컨텐츠 갱신 -->
 <script th:inline="javascript">
   $(document).ready(function() {
       $('.menu-button').click(function(e) {
           e.preventDefault();
-
           var menuUrl = $(this).attr('href');
-
           $.get(menuUrl, function(data) {
               $('#content-container').html(data);
           });

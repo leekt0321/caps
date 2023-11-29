@@ -37,13 +37,8 @@
     </form>
 
     <!-- 추가: 저장된 다이어리 목록 표시 -->
-    <h3>Saved Diaries</h3>
-    <ul>
-        <li th:each="diary : ${userDiaries}">
-            <span th:text="${diary.content}"></span>
-            <span th:text="${diary.createdAt}"></span>
-        </li>
-    </ul>
+
+
 
     <!-- 유튜브 API 로드 스크립트 -->
     <script src="https://www.youtube.com/iframe_api"></script>

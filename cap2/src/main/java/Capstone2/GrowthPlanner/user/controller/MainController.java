@@ -1,7 +1,6 @@
 // MainController.java
 package Capstone2.GrowthPlanner.user.controller;
 
-<<<<<<< HEAD
 import Capstone2.GrowthPlanner.user.repository.MemberRepository;
 import Capstone2.GrowthPlanner.user.repository.entitiy.Game;
 import Capstone2.GrowthPlanner.user.repository.entitiy.Member;

@@ -2,12 +2,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- ... (다른 헤더 정보들) ... -->
+    <script type="text/javascript">
+        function disableCheckboxes() {
+            var checkboxes = document.getElementsByName('missions');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].disabled = true;
+            }
+            document.getElementById('missionForm').submit();
+        }
+        function resetCount() {
+            document.getElementById('countForm').submit();
+        }
+    </script>
 </head>
 <body>
 <div th:fragment="menuContent">
     <h2>Menu 4 Content</h2>
-    <p>이곳에 Menu 4에 대한 내용을 추가하세요.</p>
+    <div th:if="${error != null}" th:text="${error}"></div>
+    <form id="missionForm" action="/checkAttendanceM" method="post">
+        <label th:text="${quest1}"></label>
+        <input type="checkbox" th:value="${quest1}" name="mission1" /><br/>
+
+        <label th:text="${quest2}"></label>
+        <input type="checkbox" th:value="${quest2}" name="mission2" /><br/>
+
+        <label th:text="${quest3}"></label>
+        <input type="checkbox" th:value="${quest3}" name="mission3" /><br/>
+
+        <label th:text="${quest4}"></label>
+        <input type="checkbox" th:value="${quest4}" name="mission4" /><br/>
+
+        <button type="button" onclick="disableCheckboxes()">미션 완료</button>
+    </form>
+
+        <form id="countForm" action="/resetCount" method="post">
+        <button type="button" onclick="resetCount()">Reset</button>
+
+    </form>
+    </form>
 </div>
 </body>
 </html>

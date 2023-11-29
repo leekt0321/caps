@@ -26,6 +26,7 @@ public class Game {
     private Long patient;
     private Long LUK;
     private boolean att_check;
+    private Long count;
 
 
 
